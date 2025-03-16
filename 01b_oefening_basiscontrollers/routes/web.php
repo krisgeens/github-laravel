@@ -1,25 +1,16 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\WezensController;
+use App\Http\Controllers\KoninkrijkenController;
 
-Route::get('/', function() {
-    return view('welcome');
-})->name('home');
 
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
-Route::get('/wezens/{wezen?}', function($wezen = "wilde hond") {
-    //return view('wezens.show', ['wezen' => $wezen]);  // BEIDE schrijfwijzen werken !!
-    return view('wezens.show', compact('wezen'));       // BEIDE schrijfwijzen werken !!
-})->name('wezens.show');
- 
+Route::get('/wezens/{wezen?}', [WezensController::class, 'show'])->name('wezens.show');
 
 Route::prefix('koninkrijk')->group(function() {
-
-    Route::get('/noord', function(){
-        return view('koninkrijk/noord');
-    })->name('koninkrijk.noord');
-
-    Route::get('/zuid', function(){
-        return view('koninkrijk/zuid');
-    })->name('koninkrijk.zuid');
+    Route::get('/noord', [KoninkrijkenController::class, 'noord'])->name('koninkrijk.noord');
+    Route::get('/zuid', [KoninkrijkenController::class, 'zuid'])->name('koninkrijk.zuid');
 });
