@@ -8,7 +8,8 @@ Route::get('/', function() {
 
 
 Route::get('/wezens/{wezen?}', function($wezen = "wilde hond") {
-    return view('wezens.show', ['wezen' => $wezen]);
+    //return view('wezens.show', ['wezen' => $wezen]);  // BEIDE schrijfwijzen werken !!
+    return view('wezens.show', compact('wezen'));       // BEIDE schrijfwijzen werken !!
 })->name('wezens.show');
  
 
